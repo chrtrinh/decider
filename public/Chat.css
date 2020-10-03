@@ -32,3 +32,13 @@
   margin-right: 10px;
   outline-width: 0;
 }
+
+.chat__input > button {
+  outline-width: 0;
+  border-width: 0;
+  background: transparent;
+}
+
+.chat__top::-webkit-scrollbar {
+  display: none;
+}

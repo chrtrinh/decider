@@ -1,37 +1,50 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Message from './Message'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import {connect} from 'react-redux'
+import {css} from 'emotion'
+import {updateUser} from '../store/selectedUser'
+import ScrollToBottom from 'react-scroll-to-bottom'
+
+const ROOT_CSS = css({
+  height: 600
+})
 
 const Chat = props => {
   const {selectedUser} = props
   const {messages} = selectedUser
-
   const [input, setInput] = useState('')
-
-  const onClick = () => {
-    console.log('Liked!')
-  }
 
   return (
     <div className="chat">
       <div className="chat__top">
-        {messages ? (
-          messages.map((message, iter) => (
-            <Message key={iter} message={message} />
-          ))
-        ) : (
-          <h4>loading</h4>
-        )}
+        <ScrollToBottom className={ROOT_CSS}>
+          {messages ? (
+            messages.map((message, iter) => (
+              <Message key={iter} message={message} />
+            ))
+          ) : (
+            <h4>loading</h4>
+          )}
+        </ScrollToBottom>
       </div>
+
       <div className="chat__bottom">
         <div className="chat__input">
           <input
             type="text"
             placeholder="Type a message..."
             onChange={e => setInput(e.target.value)}
+            onKeyPress={e => props.sendMessage(e, setInput)}
+            value={input}
           />
-          <ThumbUpIcon onClick={() => onClick()} />
+          <button
+            type="button"
+            value="👍"
+            onClick={e => props.sendLike(e, setInput)}
+          >
+            <ThumbUpIcon value="👍" />
+          </button>
         </div>
       </div>
     </div>
@@ -45,7 +58,9 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    updateUser: userId => dispatch(updateUser(userId))
+  }
 }
 
 export default connect(mapState, mapDispatch)(Chat)

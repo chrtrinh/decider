@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
+import {connect} from 'react-redux'
+import {updateUser} from '../store/selectedUser'
 import Chat from './Chat'
 import SideBar from './SideBar'
 import UserBar from './UserBar'
 
 const Media = props => {
-  console.log('props, ', props)
   const [sideBar, setSideBar] = useState(false)
 
   const onClick = () => {
@@ -22,7 +23,11 @@ const Media = props => {
             sideBar ? 'media__bottom__left' : 'media__bottom__left__active'
           }
         >
-          <Chat data={props} />
+          <Chat
+            data={props}
+            sendMessage={props.sendMessage}
+            sendLike={props.sendLike}
+          />
         </div>
         <div
           className={
@@ -36,4 +41,16 @@ const Media = props => {
   )
 }
 
-export default Media
+const mapState = state => {
+  return {
+    selectedUser: state.selectedUser
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    updateUser: userId => dispatch(updateUser(userId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Media)

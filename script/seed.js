@@ -54,44 +54,40 @@ async function seed() {
     }),
     Message.create({
       message: 'Hello world 4'
-    }),
-    Message.create({
-      message: 'Hello world 5'
-    }),
-    Message.create({
-      message: 'Hello world 6'
-    }),
-    Message.create({
-      message: 'Hello world 7'
-    }),
-    Message.create({
-      message: 'Hello world 8'
     })
+    // Message.create({
+    //   message: 'Hello world 5',
+    // }),
+    // Message.create({
+    //   message: 'Hello world 6',
+    // }),
+    // Message.create({
+    //   message: 'Hello world 7',
+    // }),
+    // Message.create({
+    //   message: 'Hello world 8',
+    // }),
   ])
 
   const room = await Promise.all([
     Room.create({members: [users[0].id, users[1].id]}),
-    Room.create({members: [users[0].id, users[2].id]}),
-    Room.create({members: [users[0].id, users[3].id]}),
-    Room.create({members: [users[0].id, users[4].id]})
+    Room.create({members: [users[2].id, users[3].id]})
   ])
-  console.dir(Object.keys(Room.prototype))
-
-  // console.dir(Object.keys(User.prototype))
 
   await room[0].addUser(users[0])
   await room[0].addUser(users[1])
-  // await room[1].addUsers(users[0])
-  // await room[1].addUsers(users[2])
+  await room[1].addUsers(users[0])
+  await room[1].addUsers(users[2])
   // await room[2].addUsers(users[0])
   // await room[2].addUsers(users[3])
   await users[0].addMessage(messages[0])
   await room[0].addMessage(messages[0])
   await users[1].addMessage(messages[1])
   await room[0].addMessage(messages[1])
-  // await users[0].addMessage(messages[2])
-  // await room[1].addMessage(messages[2])
-  // await room[2].addMessage(messages[3])
+  await users[2].addMessage(messages[2])
+  await room[1].addMessage(messages[2])
+  await users[3].addMessage(messages[3])
+  await room[1].addMessage(messages[3])
   // await users[0].addMessage(messages[3])
   // await users[3].addMessage(messages[4])
   // await room[2].addMessage(messages[4])

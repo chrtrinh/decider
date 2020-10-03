@@ -116,7 +116,24 @@ router.get('/chats/:userId/', async (req, res, next) => {
         userId: req.user.id
       }
     })
-    let roomId = room.dataValues.roomId
+
+    if (!room) {
+      room = await Room.findAll({
+        where: {
+          members: {
+            [Op.contains]: [2]
+          }
+        }
+      })
+    }
+
+    let roomId
+    if (!room.dataValues) {
+      roomId = 1
+    } else {
+      roomId = room.dataValues.roomId
+    }
+    // let roomId = room.dataValues.roomId
     let messages = await Message.findAll({
       where: {
         roomId
@@ -124,6 +141,14 @@ router.get('/chats/:userId/', async (req, res, next) => {
       include: [User],
       attributes: ['id', 'message', 'timeStamp']
     })
+
+    messages
+      .sort(function(a, b) {
+        return a.id - b.id
+      })
+      .sort(function(a, b) {
+        return a.name - b.name
+      })
 
     res.send(messages)
   } catch (err) {
