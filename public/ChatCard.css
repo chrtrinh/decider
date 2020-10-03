@@ -1,0 +1,39 @@
+.chatCard {
+  font-family: inherit;
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+  background: white;
+}
+
+.chatCard__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.chatCard__right {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatCard__right__container > h4 {
+  font-size: small;
+  padding: 0px;
+  margin: 0px;
+}
+
+.chatCard__right__container > h6 {
+  font-size: small;
+  padding: 0px;
+  margin: 0px;
+}
+
+.chatCard__left > .MuiAvatar-root {
+  border: 1px solid lightgray;
+  width: 50px;
+  height: 50px;
+}

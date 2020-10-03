@@ -1,18 +1,108 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Message, Room} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      firstName: 'cody',
+      lastName: 'last',
+      email: 'cody@email.com',
+      password: '123',
+      imageUrl:
+        'https://avatars1.githubusercontent.com/u/27032995?s=400&u=45fc9d76050a352834fa9e8868d174defaeb6d1c&v=4'
+    }),
+    User.create({
+      firstName: 'murphy',
+      lastName: 'last',
+      email: 'murphy@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'koty',
+      lastName: 'last',
+      email: 'koty@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'billy',
+      lastName: 'last',
+      email: 'billy@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'danny',
+      lastName: 'last',
+      email: 'danny@email.com',
+      password: '123'
+    })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const messages = await Promise.all([
+    Message.create({
+      message: 'Hello world'
+    }),
+    Message.create({
+      message: 'Hello world 2'
+    }),
+    Message.create({
+      message: 'Hello world 3'
+    }),
+    Message.create({
+      message: 'Hello world 4'
+    }),
+    Message.create({
+      message: 'Hello world 5'
+    }),
+    Message.create({
+      message: 'Hello world 6'
+    }),
+    Message.create({
+      message: 'Hello world 7'
+    }),
+    Message.create({
+      message: 'Hello world 8'
+    })
+  ])
+
+  const room = await Promise.all([
+    Room.create({members: [users[0].id, users[1].id]}),
+    Room.create({members: [users[0].id, users[2].id]}),
+    Room.create({members: [users[0].id, users[3].id]}),
+    Room.create({members: [users[0].id, users[4].id]})
+  ])
+  console.dir(Object.keys(Room.prototype))
+
+  // console.dir(Object.keys(User.prototype))
+
+  await room[0].addUser(users[0])
+  await room[0].addUser(users[1])
+  // await room[1].addUsers(users[0])
+  // await room[1].addUsers(users[2])
+  // await room[2].addUsers(users[0])
+  // await room[2].addUsers(users[3])
+  await users[0].addMessage(messages[0])
+  await room[0].addMessage(messages[0])
+  await users[1].addMessage(messages[1])
+  await room[0].addMessage(messages[1])
+  // await users[0].addMessage(messages[2])
+  // await room[1].addMessage(messages[2])
+  // await room[2].addMessage(messages[3])
+  // await users[0].addMessage(messages[3])
+  // await users[3].addMessage(messages[4])
+  // await room[2].addMessage(messages[4])
+  // await users[2].addMessage(messages[5])
+  // await room[0].addMessage(messages[5])
+  // await users[4].addMessage(messages[6])
+  // await room[3].addMessage(messages[6])
+  // await users[0].addMessage(messages[7])
+  // await room[3].addMessage(messages[7])
+
+  // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 

@@ -1,0 +1,34 @@
+.chat {
+  flex: 0.6;
+  border-bottom: 0px;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding: 10px;
+  background: #fdfffc;
+  height: inherit;
+  border: 1px solid black;
+}
+
+.chat__top {
+  height: 600px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.chat__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.chat__input > input {
+  padding-left: 10px;
+  border-width: 1px;
+  border-radius: 8px;
+  height: 35px;
+  width: 100%;
+  margin-right: 10px;
+  outline-width: 0;
+}
