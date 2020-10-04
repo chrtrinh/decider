@@ -45,14 +45,33 @@ router.get('/:userId/chats', async (req, res, next) => {
 
     let outputArr = []
 
-    let membersArray = messages.map(message => {
-      const {members} = message.room
-      members.forEach(memberId => {
-        if (parseInt(memberId, 10) !== parseInt(userId)) {
-          outputArr.push(parseInt(memberId, 10))
+    if (messages.length === 0) {
+      let rooms = await Room.findAll({
+        where: {
+          members: {
+            [Op.contains]: [req.user.id]
+          }
         }
       })
-    })
+
+      let roomsArray = rooms.map(room => {
+        const {members} = room
+        members.forEach(memberId => {
+          if (parseInt(memberId, 10) !== parseInt(userId)) {
+            outputArr.push(parseInt(memberId, 10))
+          }
+        })
+      })
+    } else {
+      let membersArray = messages.map(message => {
+        const {members} = message.room
+        members.forEach(memberId => {
+          if (parseInt(memberId, 10) !== parseInt(userId)) {
+            outputArr.push(parseInt(memberId, 10))
+          }
+        })
+      })
+    }
 
     let results = await User.findAll({
       where: {
