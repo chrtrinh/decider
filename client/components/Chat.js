@@ -19,13 +19,11 @@ const Chat = props => {
     <div className="chat">
       <div className="chat__top">
         <ScrollToBottom className={ROOT_CSS}>
-          {messages ? (
-            messages.map((message, iter) => (
-              <Message key={iter} message={message} />
-            ))
-          ) : (
-            <h4>loading</h4>
-          )}
+          {messages
+            ? messages.map((message, iter) => (
+                <Message key={iter} message={message} />
+              ))
+            : null}
         </ScrollToBottom>
       </div>
 
