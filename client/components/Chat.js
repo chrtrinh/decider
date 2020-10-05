@@ -11,7 +11,7 @@ const ROOT_CSS = css({
 })
 
 const Chat = props => {
-  const {selectedUser} = props
+  const {selectedUser, user} = props
   const {messages} = selectedUser
   const [input, setInput] = useState('')
 
@@ -21,7 +21,7 @@ const Chat = props => {
         <ScrollToBottom className={ROOT_CSS}>
           {messages
             ? messages.map((message, iter) => (
-                <Message key={iter} message={message} />
+                <Message key={iter} message={message} loggedInUser={user} />
               ))
             : null}
         </ScrollToBottom>
@@ -51,7 +51,8 @@ const Chat = props => {
 
 const mapState = state => {
   return {
-    selectedUser: state.selectedUser
+    selectedUser: state.selectedUser,
+    user: state.user
   }
 }
 

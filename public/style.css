@@ -6,6 +6,7 @@
 @import 'ChatCard.css';
 @import 'UserBar.css';
 @import 'Message.css';
+@import 'Navbar.css';
 
 body {
   font-family: Helvetica, sans-serif;

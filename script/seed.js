@@ -44,7 +44,7 @@ async function seed() {
 
   const messages = await Promise.all([
     Message.create({
-      message: 'Hello world'
+      message: 'Hey!!'
     }),
     Message.create({
       message: 'Hello world 2'

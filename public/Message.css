@@ -1,5 +1,6 @@
 .message {
   display: flex;
+  justify-content: flex-end;
 }
 
 .message__left {
@@ -11,13 +12,57 @@
 
 .message__left > .MuiAvatar-root {
   border: 1px solid rgba(0, 0, 0, 0.315);
+  display: none;
 }
 
 .message__right {
-  width: 500px;
+  width: min(0, 500px);
 }
 
 .message__body > h4 {
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 0;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.message__body {
+  display: flex;
+}
+
+.message__body > h6 {
+  margin-left: 10px;
+}
+
+.message__receiver {
+  display: flex;
+}
+
+.message__receiver__left {
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message__receiver__left > .MuiAvatar-root {
+  border: 1px solid rgba(0, 0, 0, 0.315);
+}
+
+.message__receiver__right {
+  width: min(0, 500px);
+}
+
+.message__body__receiver {
+  display: flex;
+}
+
+.message__body__receiver > h6 {
+  margin-left: 10px;
+}
+
+.message__body__receiver > h4 {
   padding: 5px;
   font-size: 14px;
   border: 1px solid black;

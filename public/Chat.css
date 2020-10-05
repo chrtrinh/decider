@@ -39,6 +39,10 @@
   background: transparent;
 }
 
+.chat__input > button > .MuiSvgIcon-root {
+  color: red;
+}
+
 .chat__top::-webkit-scrollbar {
   display: none;
 }
