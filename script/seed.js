@@ -76,10 +76,12 @@ async function seed() {
 
   await room[0].addUser(users[0])
   await room[0].addUser(users[1])
-  await room[1].addUsers(users[0])
   await room[1].addUsers(users[2])
+  await room[1].addUsers(users[3])
   await users[0].addMessage(messages[0])
   await room[0].addMessage(messages[0])
+  await users[2].addMessage(messages[1])
+  await room[1].addMessage(messages[1])
   // await users[1].addMessage(messages[1])
   // await room[0].addMessage(messages[1])
 
